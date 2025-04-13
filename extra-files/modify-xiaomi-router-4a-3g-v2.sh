@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+exit 0
+
 AIMFILE=target/linux/ramips/dts/mt7621_xiaomi_mi-router-4a-common.dtsi
 AIDFILE=target/linux/ramips/dts/mt7621_youhua_wr1200js.dts
 [ -e "$AIMFILE" ] || AIMFILE=target/linux/ramips/dts/mt7621_xiaomi_mi-router-4a-3g-v2.dtsi
