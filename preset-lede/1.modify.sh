@@ -41,6 +41,7 @@ sed -i '/KERNEL_PATCHVER/cKERNEL_PATCHVER:=5.10' target/linux/ramips/Makefile
 
 # modify login password to coolxiaomi
 #sed -i '/root/croot:$1$CBd7u73H$LvSDVXLBrzpk4JfuuN.Lv1:18676:0:99999:7:::' package/base-files/files/etc/shadow
+sed -i '/root/croot:$1$CBd7u73H$gi7cXSkswhMhevm65L5Oi1:18676:0:99999:7:::' package/base-files/files/etc/shadow
 
 # replace geodata source
 . $(dirname $0)/../extra-files/update-geodata.sh
