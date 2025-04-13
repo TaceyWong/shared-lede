@@ -10,7 +10,7 @@ if grep -q "$MARK" $AIMFILE; then
 else
     sed -i "1i $MARK" $AIMFILE
 fi
-exit 0
+
 SPECIFIC_LINE=$(sed -n '/&spi0/=' $AIMFILE)
 BASE_TEXT=$(sed '/&spi0/,/^};/d' $AIMFILE)
 
