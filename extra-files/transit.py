@@ -92,11 +92,11 @@ def generate_temp_modify_sh(temp, ori, config, ip, pwd):
             new = 'lan) ipad=${ipaddr:-"' + ip + '"} ;;'
             f.write(
                 f"\nsed -i '/lan) ipad=/c{new}' package/base-files/files/bin/config_generate\n")
-        f.write(
-                f"\nsed -i 'ImmortalWrt/cicosmos.space' package/base-files/files/bin/config_generate\n")
         if pwd:
             f.write(
                 f"\nsed -i '/root/c{crypt_str(pwd)}' package/base-files/files/etc/shadow\n")
+        f.write(
+                f"\nsed -i 's/ImmortalWrt/icosmos.space/g' package/base-files/files/bin/config_generate\n")
     return tm1
 
 
