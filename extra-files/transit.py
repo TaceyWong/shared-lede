@@ -95,8 +95,6 @@ def generate_temp_modify_sh(temp, ori, config, ip, pwd):
         if pwd:
             f.write(
                 f"\nsed -i '/root/c{crypt_str(pwd)}' package/base-files/files/etc/shadow\n")
-        f.write(
-                f"\nsed -i 's/ImmortalWrt/icosmos.space/g' package/base-files/files/bin/config_generate\n")
     return tm1
 
 
