@@ -20,7 +20,6 @@ if $SWITCH_LATEST_TAG; then
 fi
 
 cd $CODE_DIR
-git fetch 32ad565db9509215893aacab8cef7c9660dffd7c
 git checkout 32ad565db9509215893aacab8cef7c9660dffd7c
 cd ..
 
