@@ -151,8 +151,8 @@ jobs:
         run: |
           ./scripts/feeds update -a
           cd feeds/luci
-          git fetch origin 2e79bb11f5123c8792445c95509b87683006d4c9
-          git checkout 2e79bb11f5123c8792445c95509b87683006d4c9
+          git fetch origin dbc52d6b888e5877d35cef5a956bc5fb0ebb92c3
+          git checkout dbc52d6b888e5877d35cef5a956bc5fb0ebb92c3
           cd ../..
           ./scripts/feeds install -a
 
