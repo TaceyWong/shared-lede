@@ -145,6 +145,7 @@ jobs:
           rm -rf luci-app-argon-config
           git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git
           git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config.git
+          cd ..
           ./scripts/feeds install -a
 
       - name: Modify configuration
