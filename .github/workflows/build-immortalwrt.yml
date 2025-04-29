@@ -1,3 +1,12 @@
+#
+# Copyright (C) 2022-2024 hugcabbage <fengsongtianxia@gmail.com>
+#
+# This is free software, licensed under the MIT License.
+#
+# <https://github.com/hugcabbage/shared-lede>
+#
+# The firmware code comes from immortalwrt
+#
 name: build immortalwrt
 
 on:
@@ -67,7 +76,7 @@ on:
         default: ''
         type: string
       record:
-        description: '输入版本描述'
+        description: '输入版本描述'     
         required: false
         default: '升级内容：内核升级，更新应用版本'
         type: string
@@ -80,16 +89,6 @@ on:
         description: '上传到artifact'
         required: false
         type: boolean
-      immortal_tag:
-        description: '指定 ImmortalWrt SNAPSHOT Commit SHA，如 r0+32986-19bfc37759'
-        required: false
-        default: '19bfc37759'
-        type: string
-      luci_tag:
-        description: '指定 LuCI openwrt-24.10 branch Commit SHA，如 25.080.17148~105e22'
-        required: false
-        default: '105e22'
-        type: string
 
 permissions:
   contents: write
@@ -100,7 +99,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       EXTRA_STR: _some
-
     steps:
 
       - name: Hide sensitive inputs
@@ -113,11 +111,10 @@ jobs:
         run: |
           df -h
 
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           path: ${{ env.EXTRA_STR }}
-          fetch-depth: 0
 
       - name: Prepare environments
         env:
@@ -143,33 +140,17 @@ jobs:
           chmod +x $TRANSIT_PY
           $TRANSIT_PY
 
-      - name: Clone ImmortalWrt 核心源码
+      - name: Clone sources
         env:
-          IMMORTAL_TAG: ${{ inputs.immortal_tag }}
-          CLONE_SH:    ${{ steps.prepare-deployment.outputs.clone_sh }}
+          CLONE_SH: ${{ steps.prepare-deployment.outputs.clone_sh }}
         run: |
           chmod +x $CLONE_SH
           $CLONE_SH
-          if [ -n "$IMMORTAL_TAG" ]; then
-            cd ${{ env.EXTRA_STR }}/preset-immortalwrt/immortalwrt
-            git fetch --tags --prune --force
-            git checkout $IMMORTAL_TAG
-          fi
 
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-
-      - name: Pin LuCI feed 到指定 Commit
-        if: ${{ inputs.luci_tag != '' }}
-        env:
-          LUCI_TAG: ${{ inputs.luci_tag }}
-        run: |
-          cd ${{ env.EXTRA_STR }}/preset-immortalwrt/immortalwrt/feeds/luci
-          git fetch --tags --prune --force
-          git checkout $LUCI_TAG
-          cd ../../../
 
       - name: Modify configuration
         env:
@@ -209,7 +190,7 @@ jobs:
         id: generate-summary
         env:
           FOR_DEVICE: ${{ steps.prepare-deployment.outputs.fordevice }}
-          CODE_DIR:   ${{ steps.prepare-deployment.outputs.codedir }}
+          CODE_DIR: ${{ steps.prepare-deployment.outputs.codedir }}
           TRANSIT_PY: ${{ env.EXTRA_STR }}/extra-files/transit.py
         run: |
           chmod +x $TRANSIT_PY
