@@ -19,10 +19,7 @@ if $SWITCH_LATEST_TAG; then
     cd ..
 fi
 
-cd $CODE_DIR
-git fetch origin 32ad565db9509215893aacab8cef7c9660dffd7c
-git checkout 32ad565db9509215893aacab8cef7c9660dffd7c
-cd ..
+
 
 
 mv ./$CODE_DIR/* ./
