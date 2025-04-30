@@ -150,10 +150,6 @@ jobs:
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
-          cd feeds/luci
-          git fetch origin dbc52d6b888e5877d35cef5a956bc5fb0ebb92c3
-          git checkout dbc52d6b888e5877d35cef5a956bc5fb0ebb92c3
-          cd ../..
           ./scripts/feeds install -a
 
       - name: Modify configuration
